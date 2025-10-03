@@ -11,6 +11,15 @@
         font-family: 'Noto Sans KR', Arial, sans-serif;
       }
       
+      .dynamic-text-large {
+        font-size: clamp(1rem, 3.5vw, 1.5rem);
+        line-height: 1.2;
+      }
+      .dynamic-text-small {
+        font-size: clamp(0.75rem, 2.8vw, 1rem);
+        line-height: 1.2;
+      }
+
       @page {
         margin: 1cm;
       }
@@ -21,39 +30,28 @@
             overflow: hidden;
             visibility: visible;
         }
-        body > *:not(#root) {
-            display: none;
-        }
-        #root > div > div > *:not(#printable-area):not(#student-printable-area) {
-            display: none;
-        }
+        body > *:not(#root) { display: none; }
+        #root > div > div > *:not(#printable-area):not(#student-printable-area) { display: none; }
         .no-print, .no-print * {
            visibility: hidden !important;
            display: none !important;
         }
         #printable-area, #student-printable-area {
           visibility: visible;
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 100% !important;
-          height: 100% !important;
-          margin: 0 !important;
-          padding: 0 !important;
-          box-shadow: none !important;
-          border: none !important;
+          position: absolute; left: 0; top: 0;
+          width: 100% !important; height: 100% !important;
+          margin: 0 !important; padding: 0 !important;
+          box-shadow: none !important; border: none !important;
           overflow: hidden;
         }
         th, td {
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
             box-shadow: none !important;
-            /* 1. 모든 셀 중앙, 가운데 정렬 */
             text-align: center !important;
             vertical-align: middle !important;
         }
 
-        /* --- 시간표 인쇄 (세로) --- */
         body.timetable-view-active {
             @page { size: A4 portrait; }
             #printable-area {
@@ -69,12 +67,10 @@
             #printable-area .text-lg { font-size: 0.8rem !important; }
         }
 
-        /* --- 선택과목 인쇄 (가로) --- */
         body.student-view-active {
             @page { size: A4 landscape; }
             #student-printable-area {
                 padding: 0.5cm !important;
-                /* 3. J열 잘림 방지를 위해 zoom 값을 미세 조정 */
                 zoom: 72%; 
             }
             #student-printable-area h1 {
@@ -82,13 +78,8 @@
                 margin-bottom: 0.5rem !important;
                 padding-bottom: 0.5rem !important;
             }
-            #student-printable-area .overflow-x-auto {
-                overflow: visible !important;
-            }
-            #student-printable-area table {
-                font-size: 8pt !important; /* 가독성을 위해 폰트 크기 약간 키움 */
-                width: 100% !important;
-            }
+            #student-printable-area .overflow-x-auto { overflow: visible !important; }
+            #student-printable-area table { font-size: 8pt !important; }
             #student-printable-area th, #student-printable-area td {
                 padding: 2px 3px !important;
                 border: 1px solid #ccc !important;
@@ -112,7 +103,6 @@
         const { useState, useMemo, useEffect, useCallback } = React;
 
         // --- Data Section ---
-
         const semester1Csv = `요일,월,,,,,,화,,,,,,,수,,,,,,목,,,,,,,금,,,,,
 교사명/교시,1,2,3,4,5,6,1,2,3,4,5,6,7,1,2,3,4,5,6,1,2,3,4,5,6,7,1,2,3,4,5,6
 오채영,106,,105,107,,,107,,101,,104,102,,103,106,,,창체,창체,,,104,105,,101,103,,102,,,,
@@ -258,11 +248,11 @@ const semester2Csv = `요일,월,,,,,,화,,,,,,,수,,,,,,목,,,,,,,금,,,,,
 허지선,,,,,,,,105,104,101,,,,,,103,102,창체,창체,,,,,,,,,,,,,
 5,,,,,,,,수학B,수학B,수학B,,,,,,수학B,수학B,,,,,,,,,,,,,,,
 홍선의,,206,,205,,,208,207,,,206,,,208,206,,205,창체,창체,,205,208,,207,206,207,,205,,207,,
-15,,수학IIB,,수학IIA,,,수학IIA,수학IIA,,,수학IIA,,,수학IIA,수학IIA,,수학IIA,,,,수학IIB,수학IIA,,수학IIA,수학IIA,수학IIB,,수학IIA,,수학IIA,,
+15,,수학ⅡB,,수학ⅡA,,,수학ⅡA,수학ⅡA,,,수학ⅡA,,,수학ⅡA,수학ⅡA,,수학ⅡA,,,,수학ⅡB,수학ⅡA,,수학ⅡA,수학ⅡA,수학ⅡB,,수학ⅡA,,수학ⅡA,,
 전미경,,203,,202,,,201,202,,,204,,,201,203,,204,창체,창체,,203,204,,201,202,204,,203,,202,,
-15,,수학IIA,,수학IIA,,,수학IIA,수학IIA,,,수학IIA,,,수학IIA,수학IIA,,수학IIA,,,,수학IIB,수학IIA,,수학IIA,수학IIB,수학IIB,,수학IIA,,수학IIA,,
+15,,수학ⅡA,,수학ⅡA,,,수학ⅡA,수학ⅡA,,,수학ⅡA,,,수학ⅡA,수학ⅡA,,수학ⅡA,,,,수학ⅡB,수학ⅡA,,수학ⅡA,수학ⅡB,수학ⅡB,,수학ⅡA,,수학ⅡA,,
 이춘신,208,,208,,208,,206,,208,208,,,208,,,208,201,창체,창체,208,,,208,,,,208,208,,,208,208
-15,B기하,,D기하,,A기하,,영상,,A기하,E기하,,,B기하,,,E기하,수학IIB,,,E기하,,,D기하,,,,A기하,수학IIB,,,B기하,D기하
+15,B기하,,D기하,,A기하,,영상,,A기하,E기하,,,B기하,,,E기하,수학ⅡB,,,E기하,,,D기하,,,,A기하,수학ⅡB,,,B기하,D기하
 심은아,602,,,,,602,,602,602,,602,,602,,602,602,602,창체,창체,602,,,,602,602,,,,602,602,602,
 15,J확통,,,,,D확통,,I확통,E확통,,F확통,,J확통,,I확통,F확통,D확통,,,F확통,,,,J확통,E확통,,,,D확통,I확통,E확통,
 김미경(수),305,303,303,,,303,303,,,,303,,305,,,303,303,창체,창체,303,,303,303,305,,,,,303,,,303
@@ -788,6 +778,7 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
 30826,하은비,A,J,G,,,,F,,,,,,,B,,,,E,,,H,I,C,,,,,,,,D,,,,J
 30827,한도원,D,I,,G,,,H,,,,E,,,,,,B,J,,,,,,,,,,,C,,,,A,F,I
 30828,허예준,D,C,,G,,I,,,,,,A,,B,F,,,,,,H,,,,,,,,,,,,E,J,C
+20828,용하음,D,C,E,,A,,,,,,,,B,,,,,,,,,,,,,,,,,,,,,,
 `;
         
         // --- End of Data Section ---
@@ -796,6 +787,8 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
             '심국': '심화 국어', '기하': '기하', '영문': '영어권 문화', '한지': '한국지리', '세사': '세계사', '사문': '사회･문화', '생윤': '생활과 윤리', '물Ⅰ': '물리학Ⅰ', '화Ⅰ': '화학Ⅰ', '생Ⅰ': '생명과학Ⅰ', '지Ⅰ': '지구과학Ⅰ', '체탐': '체육 탐구', '음연': '음악 연주', '미감': '미술 감상과 비평', '일Ⅰ': '일본어Ⅰ', '중Ⅰ': '중국어Ⅰ',
             '영독': '영어 독해와 작문', '운건': '운동과 건강', '화작': '화법과 작문', '독서': '독서', '고전': '고전 읽기', '확통': '확률과 통계', '미적': '미적분', '인수': '인공지능 수학', '세지': '세계지리', '동사': '동아시아사', '정법': '정치와 법', '윤사': '윤리와 사상', '여지': '여행지리', '사탐': '사회문제 탐구', '고윤': '고전과 윤리', '물Ⅱ': '물리학Ⅱ', '화Ⅱ': '화학Ⅱ', '생Ⅱ': '생명과학Ⅱ', '지Ⅱ': '지구과학Ⅱ', '과사': '과학사', '생활': '생활과 과학', '체기': '체육 전공 실기 기초', '체심': '체육 전공 실기 심화', '음이': '음악 이론', '시청': '시창·청음', '평조': '평면 조형', '미실': '미술 전공 실기', '인지': '인공지능 기초', '일Ⅱ': '일본어Ⅱ', '중Ⅱ': '중국어Ⅱ', '교육': '교육학', '환경': '환경', '실경': '실용 경제', '논술': '논술', '창독': '창독'
         };
+        
+        // --- React Components Start Here ---
 
         const parseTimetableCSV = (csvText) => new Promise((resolve, reject) => {
             try {
@@ -894,14 +887,14 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
                     <table className="w-full border-collapse text-center table-fixed">
                         <thead>
                             <tr>
-                                <th className="p-4 border-b-2 border-r border-gray-400 bg-[#666666] text-white font-bold text-2xl shadow-md">교시</th>
-                                {days.map(day => (<th key={day} className="p-4 border-b-2 border-r border-gray-400 bg-[#3c78d8] text-white font-bold text-2xl shadow-md">{day}</th>))}
+                                <th className="p-2 md:p-4 border-b-2 border-r border-gray-400 bg-[#666666] text-white font-bold text-lg md:text-2xl shadow-md">교시</th>
+                                {days.map(day => (<th key={day} className="p-2 md:p-4 border-b-2 border-r border-gray-400 bg-[#3c78d8] text-white font-bold text-lg md:text-2xl shadow-md">{day}</th>))}
                             </tr>
                         </thead>
                         <tbody>
                             {gridData.map((row, periodIndex) => (
-                                <tr key={periodIndex} className={`h-20 text-lg ${periodIndex === 3 ? 'border-b-2 border-orange-500' : 'border-b border-gray-200'}`}>
-                                    <td className="p-1 border-r border-gray-200 bg-gray-100 text-gray-800 font-bold text-2xl shadow-inner">{periodIndex + 1}</td>
+                                <tr key={periodIndex} className={`h-16 md:h-20 ${periodIndex === 3 ? 'border-b-2 border-orange-500' : 'border-b border-gray-200'}`}>
+                                    <td className="p-1 border-r border-gray-200 bg-gray-100 text-gray-800 font-bold text-xl md:text-2xl shadow-inner">{periodIndex + 1}</td>
                                     {row.map((cell, dayIndex) => {
                                         const isCreativeActivity = cell?.topText === '창체';
                                         const is7thPeriodEmptySlot = !cell && periodIndex === 6 && [0, 2, 4].includes(dayIndex);
@@ -909,7 +902,16 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
                                         const isSelectable = cell && !isCreativeActivity;
                                         return (
                                             <td key={`${periodIndex}-${dayIndex}`} className={`p-1 border-r border-gray-200 ${cellBgColor} overflow-hidden text-ellipsis transition-all duration-200 ease-in-out ${isSelectable ? 'hover:shadow-lg hover:bg-yellow-50 hover:scale-105 transform cursor-pointer' : ''}`} style={{boxShadow: 'inset 2px 2px 5px rgba(0,0,0,0.05)'}} onClick={() => isSelectable && onCellClick(cell)}>
-                                                {cell ? (isCreativeActivity ? (<div className="flex flex-col justify-center items-center h-full"><span className="font-bold text-black text-2xl">{cell.topText}</span></div>) : (<div className="flex flex-col justify-center items-center h-full"><span className="font-bold text-black text-2xl">{cell.topText}</span><span className="text-blue-600 text-lg mt-1">{cell.bottomText}</span></div>)) : (<span className="text-gray-400 font-bold text-3xl"></span>)}
+                                                {cell ? (isCreativeActivity ? (
+                                                    <div className="flex flex-col justify-center items-center h-full">
+                                                        <span className="font-bold text-black dynamic-text-large">{cell.topText}</span>
+                                                    </div>
+                                                ) : (
+                                                    <div className="flex flex-col justify-center items-center h-full">
+                                                        <span className="font-bold text-black dynamic-text-large">{cell.topText}</span>
+                                                        <span className="text-blue-600 mt-1 dynamic-text-small">{cell.bottomText}</span>
+                                                    </div>
+                                                )) : (<span className="text-gray-400 font-bold text-3xl"></span>)}
                                             </td>
                                         );
                                     })}
@@ -1009,24 +1011,28 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
                 onCellClick(viewMode === 'teacher' ? cell.bottomText : cell.topText, viewMode === 'teacher' ? cell.topText : selectedClass);
             }, [viewMode, selectedClass, onCellClick]);
             return (
-                <div id="printable-area" className="bg-white p-6 md:p-8 rounded-lg shadow-2xl w-full space-y-6">
+                <div id="printable-area" className="bg-white p-4 md:p-8 rounded-lg shadow-2xl w-full space-y-6">
                     <header className="space-y-4">
                         <div className="relative text-center pb-4 border-b-2 border-gray-200">
                             <div className="absolute left-0 top-1/2 transform -translate-y-1/2"><button onClick={onReset} className="px-4 py-2 bg-[#cc4125] hover:bg-[#b33a22] text-white font-bold rounded-lg shadow-md transition-colors text-base flex items-center gap-2 no-print"><svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>뒤로</button></div>
-                            <h1 className="text-4xl font-bold tracking-tight text-black">2025학년도 {schoolInfo.semester}학기 시간표</h1>
+                            <h1 className="text-2xl md:text-4xl font-bold tracking-tight text-black">2025학년도 {schoolInfo.semester}학기 시간표</h1>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-4">
-                            <div className="flex items-center gap-2 justify-self-start">
-                                <button onClick={() => setViewMode('teacher')} className={`no-print px-6 py-3 text-xl font-bold rounded-md transition-all duration-300 shadow-md hover:shadow-lg ${viewMode === 'teacher' ? 'bg-gradient-to-b from-green-500 to-green-600 text-white' : 'bg-gray-200 text-gray-800'}`}>교사별</button>
-                                <button onClick={() => setViewMode('class')} className={`no-print px-6 py-3 text-xl font-bold rounded-md transition-all duration-300 shadow-md hover:shadow-lg ${viewMode === 'class' ? 'bg-gradient-to-b from-green-500 to-green-600 text-white' : 'bg-gray-200 text-gray-800'}`}>학급별</button>
+                        <div className="flex flex-col md:flex-row md:items-center gap-4">
+                            <div className="flex items-center gap-2">
+                                <button onClick={() => setViewMode('teacher')} className={`no-print px-4 py-2 text-lg md:px-6 md:py-3 md:text-xl font-bold rounded-md transition-all duration-300 shadow-md ${viewMode === 'teacher' ? 'bg-gradient-to-b from-green-500 to-green-600 text-white' : 'bg-gray-200 text-gray-800'}`}>교사별</button>
+                                <button onClick={() => setViewMode('class')} className={`no-print px-4 py-2 text-lg md:px-6 md:py-3 md:text-xl font-bold rounded-md transition-all duration-300 shadow-md ${viewMode === 'class' ? 'bg-gradient-to-b from-green-500 to-green-600 text-white' : 'bg-gray-200 text-gray-800'}`}>학급별</button>
                             </div>
-                            <div className="flex-grow flex justify-center w-full md:w-auto justify-self-center">
-                                <div className="relative flex items-center bg-white shadow-md rounded-lg p-1 w-full max-w-xs">{viewMode === 'teacher' ? (<>
-                                    <select value={selectedTeacher} onChange={(e) => setSelectedTeacher(e.target.value)} className="bg-transparent text-gray-900 text-2xl font-bold focus:outline-none block w-full p-3 appearance-none text-center">{parsedData.teachers.map(t => <option key={t} value={t}>{t}</option>)}</select>
-                                    <div className="bg-yellow-400 text-gray-800 font-bold px-4 py-2 rounded-md text-lg whitespace-nowrap ml-2">{teacherTotalHours}시간</div></>) : (<select value={selectedClass} onChange={(e) => setSelectedClass(e.target.value)} className="bg-transparent text-gray-900 text-2xl font-bold focus:outline-none block w-full p-3 appearance-none text-center">{parsedData.classes.map(c => <option key={c} value={c}>{c}</option>)}</select>)}
+                            <div className="flex-grow flex justify-center w-full">
+                                <div className="relative flex items-center bg-white shadow-md rounded-lg p-1 w-full max-w-[18rem]">
+                                    {viewMode === 'teacher' ? (<>
+                                        <select value={selectedTeacher} onChange={(e) => setSelectedTeacher(e.target.value)} className="bg-transparent text-gray-900 font-bold focus:outline-none block w-full p-2 appearance-none text-center text-xl md:text-2xl">{parsedData.teachers.map(t => <option key={t} value={t}>{t}</option>)}</select>
+                                        <div className="bg-yellow-400 text-gray-800 font-bold px-3 py-1 rounded-md text-base whitespace-nowrap ml-2">{teacherTotalHours}시간</div></>) : 
+                                        (<select value={selectedClass} onChange={(e) => setSelectedClass(e.target.value)} className="bg-transparent text-gray-900 font-bold focus:outline-none block w-full p-2 appearance-none text-center text-xl md:text-2xl">{parsedData.classes.map(c => <option key={c} value={c}>{c}</option>)}</select>)}
                                 </div>
                             </div>
-                            <div className="justify-self-end"><button onClick={handlePrint} className="px-5 py-2 bg-[#a64d79] hover:bg-[#8e4168] text-white font-bold rounded-lg shadow-md transition-colors text-lg no-print">인쇄하기</button></div>
+                            <div className="flex justify-end md:justify-self-end">
+                                 <button onClick={handlePrint} className="px-5 py-2 bg-[#a64d79] hover:bg-[#8e4168] text-white font-bold rounded-lg shadow-md transition-colors text-lg no-print">인쇄하기</button>
+                            </div>
                         </div>
                     </header>
                     <div><TimetableView gridData={gridData} days={DAYS_OF_WEEK} onCellClick={handleCellClick} /></div>
@@ -1078,7 +1084,7 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
                     <header className="space-y-4">
                         <div className="relative text-center pb-4 border-b-2 border-gray-200">
                              <div className="absolute left-0 top-1/2 transform -translate-y-1/2"><button onClick={onReset} className="px-4 py-2 bg-[#cc4125] hover:bg-[#b33a22] text-white font-bold rounded-lg shadow-md transition-colors text-base flex items-center gap-2 no-print"><svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>뒤로</button></div>
-                            <h1 className="text-4xl font-bold tracking-tight text-black">학생별 선택과목 조회</h1>
+                            <h1 className="text-2xl md:text-4xl font-bold tracking-tight text-black">학생별 선택과목 조회</h1>
                              <div className="absolute right-0 top-1/2 transform -translate-y-1/2"><button onClick={handlePrint} className="px-5 py-2 bg-[#a64d79] hover:bg-[#8e4168] text-white font-bold rounded-lg shadow-md transition-colors text-lg no-print">인쇄하기</button></div>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-4 p-4 bg-gray-50 rounded-lg no-print">
@@ -1095,11 +1101,9 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
                     </header>
                      <div className="overflow-x-auto shadow-md rounded-lg">
                         <table className="w-full text-sm text-left text-gray-700">
-                            {/* 👇 여기 className이 수정되었습니다 */}
                             <thead className="text-xs text-gray-900 uppercase bg-blue-100 sticky top-0 border-b border-blue-200">
                                 <tr>
-                                    <th scope="col" className="px-2 py-2 whitespace-nowrap">학번</th>
-                                    <th scope="col" className="px-2 py-2 whitespace-nowrap">이름</th>
+                                    <th scope="col" className="px-2 py-2 whitespace-nowrap">학번</th><th scope="col" className="px-2 py-2 whitespace-nowrap">이름</th>
                                     {displayCodes.map(code => <th key={code} scope="col" className="px-2 py-2 text-center whitespace-nowrap">{code}</th>)}
                                 </tr>
                             </thead>
@@ -1143,20 +1147,12 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
                 }
             }, [isAuthenticated]);
 
-            // 현재 뷰에 따라 body 클래스를 변경하여 인쇄 스타일을 제어
             useEffect(() => {
                 const body = document.body;
-                body.classList.remove('student-view-active', 'timetable-view-active'); // 기존 클래스 초기화
-                
-                if (currentView === 'student_search') {
-                    body.classList.add('student-view-active');
-                } else if (currentView === 'timetable') {
-                    body.classList.add('timetable-view-active');
-                }
-                
-                return () => { // 컴포넌트 언마운트 시 정리
-                    body.classList.remove('student-view-active', 'timetable-view-active');
-                };
+                body.classList.remove('student-view-active', 'timetable-view-active');
+                if (currentView === 'student_search') { body.classList.add('student-view-active'); } 
+                else if (currentView === 'timetable') { body.classList.add('timetable-view-active'); }
+                return () => { body.classList.remove('student-view-active', 'timetable-view-active'); };
             }, [currentView]);
 
             const handlePasswordSuccess = useCallback(() => setIsAuthenticated(true), []);
@@ -1223,4 +1219,4 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
 
     </script>
 </body>
-</html>```
+</html>
