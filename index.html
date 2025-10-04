@@ -299,7 +299,7 @@ const semester2Csv = `요일,월,,,,,,화,,,,,,,수,,,,,,목,,,,,,,금,,,,,
 이은지,104,106,,303,,,103,303,,,,102,,,303,,,창체,창체,301,303,,108,,,107,303,105,,303,,101
 15,통과A,통과A,,C물Ⅱ,,,통과A,I물Ⅱ,,,,통과A,,,I물Ⅱ,,,,,F창독,C물Ⅱ,,통과A,,,통과A,C물Ⅱ,통과A,,I물Ⅱ,,통과A
 김미경(물),205,,205,,205,601,,,205,,,601,205,,,,601,창체,창체,,,,205,,,601,205,601,601,,205,205
-15,B물Ⅰ,,D물Ⅰ,,A물Ⅰ,D생활,,,A물Ⅰ,,,B생활,B물Ⅰ,,,,D생활,,,,,,D물Ⅰ,,,B생활,A물Ⅰ,B생활,D생활,,B물Ⅰ,D물Ⅰ
+15,B물Ⅰ,,D물Ⅰ,,A물Ⅰ,D생활,,,A물Ⅰ,,,B생활,B물Ⅰ,,,,D생활,,,,,,D물Ⅰ,,,B生活,A물Ⅰ,B생활,D생활,,B물Ⅰ,D물Ⅰ
 이진아,,103,601,,104,105,,106,601,,101,,,,102,107,,창체,창체,,301,,601,,601,,,108,,,601,601
 15,,통과B,H생활,,통과B,통과B,,통과B,E생활,,통과B,,,,통과B,통과B,,,,,C창독,,H생활,,E생활,,,통과B,,,E생활,H생활
 김상수,105,,101,302,,,,,,108,,302,,103,,,301,창체,창체,,302,107,,106,,302,302,302,,102,,104
@@ -1508,7 +1508,27 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
                 const allHeaders = [...new Set([...studentData2.headers, ...studentData3.headers])];
                 const transformed = combinedData.map(s => {
                     const choices = {};
-                    allHeaders.forEach(h => { const c = s[h]; if(c) choices[c] = h; });
+                    // First, map codes to short names, allowing overwrites for now.
+                    allHeaders.forEach(h => { 
+                        const c = s[h]; 
+                        if(c) {
+                            const shortName = Object.keys(SUBJECT_CODE_MAP).find(key => SUBJECT_CODE_MAP[key] === h) || h;
+                            choices[c] = shortName;
+                        }
+                    });
+
+                    // Specifically for 3rd graders, check for the combined subject case.
+                    if (s['학번'].startsWith('3')) {
+                        const ungounCode = s['운동과 건강'];
+                        const changdokCode = s['창독'];
+                        
+                        // If both subjects exist and share the same code
+                        if (ungounCode && ungounCode === changdokCode) {
+                            const ungounShort = Object.keys(SUBJECT_CODE_MAP).find(key => SUBJECT_CODE_MAP[key] === '운동과 건강') || '운건';
+                            const changdokShort = Object.keys(SUBJECT_CODE_MAP).find(key => SUBJECT_CODE_MAP[key] === '창독') || '창독';
+                            choices[ungounCode] = `${ungounShort}/${changdokShort}`;
+                        }
+                    }
                     return { ...s, choices };
                 });
                 return { 
