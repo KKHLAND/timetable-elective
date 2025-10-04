@@ -11,34 +11,51 @@
         font-family: 'Noto Sans KR', Arial, sans-serif;
       }
       
-      .dynamic-text-large { font-size: clamp(1rem, 3.5vw, 1.5rem); line-height: 1.2; }
-      .dynamic-text-small { font-size: clamp(0.75rem, 2.8vw, 1rem); line-height: 1.2; }
+      .dynamic-text-large {
+        font-size: clamp(1rem, 3.5vw, 1.5rem);
+        line-height: 1.2;
+      }
+      .dynamic-text-small {
+        font-size: clamp(0.75rem, 2.8vw, 1rem);
+        line-height: 1.2;
+      }
 
-      @media screen {
-        /* 화면 표시용 스타일은 여기에 유지됩니다. */
+      @page {
+        margin: 1cm;
       }
 
       @media print {
-        /* --- 인쇄 기본 설정 --- */
-        body * {
-          visibility: hidden; /* 먼저 모든 요소를 숨깁니다. */
+        html, body {
+            height: 99%;
+            overflow: hidden;
+            visibility: visible;
         }
-        .printable, .printable * {
-          visibility: visible; /* 인쇄할 영역만 보이게 합니다. */
-        }
+        body > *:not(#root) { display: none; }
+        #root > div > div > *:not(.printing) { display: none; }
+        
         .no-print, .no-print * {
-           display: none !important; /* 인쇄 안 할 요소는 완전히 제거 */
+           visibility: hidden !important;
+           display: none !important;
         }
-        .printable {
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 100%;
-          margin: 0;
-          padding: 0;
-          border: none;
-          box-shadow: none;
+
+        .printing {
+          visibility: visible !important;
+          position: absolute; left: 0; top: 0;
+          width: 100% !important; height: auto !important;
+          margin: 0 !important; padding: 0 !important;
+          box-shadow: none !important;
+          border: none !important;
         }
+        .printing * {
+          visibility: visible;
+        }
+
+        /* --- 👇 모든 테이블 요소의 그림자 효과 제거 --- */
+        .printing table, .printing th, .printing td {
+            box-shadow: none !important;
+            border-style: solid !important;
+        }
+
         th, td {
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
@@ -47,35 +64,34 @@
         }
 
         /* --- 시간표 인쇄 (세로) --- */
-        @page {
-            size: A4 portrait;
-            margin: 1.5cm;
+        body.printing-portrait {
+            @page { size: A4 portrait; }
+            #printable-area {
+                padding: 1cm !important;
+                zoom: 88%;
+            }
+            #printable-area h1 { font-size: 2.2rem !important; }
+            #printable-area table th { font-size: 16pt !important; }
+            #printable-area .bg-yellow-400 { background-color: #facc15 !important; }
         }
-        #printable-area {
-            zoom: 88%;
-        }
-        #printable-area h1 { font-size: 2.2rem !important; }
-        #printable-area table th { font-size: 16pt !important; }
-        #printable-area .bg-yellow-400 { background-color: #facc15 !important; }
 
         /* --- 선택과목 인쇄 (가로) --- */
-        @page landscape-page {
-            size: A4 landscape;
-            margin: 1cm;
-        }
-        #student-printable-area {
-            page: landscape-page; /* 이 영역에만 가로 페이지 스타일 적용 */
-            zoom: 72%; 
-        }
-        #student-printable-area h1 { font-size: 1.5rem !important; margin-bottom: 0.5rem !important; }
-        #student-printable-area .overflow-x-auto { overflow: visible !important; }
-        #student-printable-area table { font-size: 8pt !important; }
-        #student-printable-area th, #student-printable-area td {
-            padding: 5px 3px !important; 
-            border: 1px solid #ccc !important;
-        }
-        #student-printable-area thead th {
-            background-color: #dbeafe !important;
+        body.printing-landscape {
+            @page { size: A4 landscape; }
+            #student-printable-area {
+                padding: 0.5cm !important;
+                zoom: 72%; 
+            }
+            #student-printable-area h1 { font-size: 1.5rem !important; margin-bottom: 0.5rem !important; }
+            #student-printable-area .overflow-x-auto { overflow: visible !important; }
+            #student-printable-area table { font-size: 8pt !important; }
+            #student-printable-area th, #student-printable-area td {
+                padding: 5px 3px !important; 
+                border: 1px solid #ccc !important;
+            }
+            #student-printable-area thead th {
+                background-color: #dbeafe !important;
+            }
         }
       }
     </style>
@@ -1675,18 +1691,25 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
             }, [studentData2, studentData3]);
 
             const handlePrint = (viewType) => {
+                const elementId = viewType === 'student_search' ? 'student-printable-area' : 'printable-area';
+                const printElement = document.getElementById(elementId);
                 const body = document.body;
-                body.classList.remove('printing-landscape', 'printing-portrait'); // Clear previous classes
-                if (viewType === 'student_search') {
-                    body.classList.add('printing-landscape');
-                } else {
-                    body.classList.add('printing-portrait');
+
+                if (printElement) {
+                    // Body 클래스로 페이지 방향 제어
+                    if (viewType === 'student_search') body.classList.add('printing-landscape');
+                    else body.classList.add('printing-portrait');
+
+                    // 인쇄 대상에 printing 클래스 추가
+                    printElement.classList.add('printing');
+
+                    setTimeout(() => {
+                        window.print();
+                        // 인쇄 후 클래스 제거
+                        body.classList.remove('printing-landscape', 'printing-portrait');
+                        printElement.classList.remove('printing');
+                    }, 150);
                 }
-                
-                setTimeout(() => {
-                    window.print();
-                    body.classList.remove('printing-landscape', 'printing-portrait');
-                }, 150);
             };
             
             const renderView = () => {
@@ -1699,12 +1722,18 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
             };
             
             return (
-                <div className="bg-gray-100 min-h-screen flex items-center justify-center p-4">
-                    <div className="w-full max-w-7xl mx-auto">
+                <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4">
+                    <main className="w-full max-w-7xl mx-auto">
                         <StudentListModal modalData={modalData} onClose={() => setModalData(null)} onStudentClick={handleStudentNameClick} />
                         <StudentDetailModal modalData={studentDetailModalData} onClose={() => setStudentDetailModalData(null)} />
                         {renderView()}
-                    </div>
+                    </main>
+                    {/* --- 👇 Footer 추가 --- */}
+                    {isAuthenticated && (
+                         <footer className="w-full text-center text-gray-500 text-sm mt-8 no-print">
+                            © 2025 KH KIM. All Rights Reserved.
+                        </footer>
+                    )}
                 </div>
             );
         };
