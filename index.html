@@ -344,6 +344,43 @@ const semester2Csv = `요일,월,,,,,,화,,,,,,,수,,,,,,목,,,,,,,금,,,,,
 4,,,,,,,사진,사진,,,,,,사진,사진,,,,,,,,,,,,,,,,,
 `;
 
+const semester3Csv = `요일,월,,,,,,화,,,,,,,수,,,,목,,,,,,,금,,,,,
+교사명/교시,1,2,3,4,5,6,1,2,3,4,5,6,7,1,2,3,4,1,2,3,4,5,6,7,1,2,3,4,5,6
+김혜원,,,,305,,,,,,,,303,,,,,,,301,,,,,303,302,303,,,,
+황혜숙,,,308,,308,,,308,,308,,,308,308,308,,,,,,308,308,,,,,,308,,308
+장수임,302,,307,,303,,302,,,303,,304,302,303,,,,,,308,307,303,,304,,304,,,,307
+우보영,307,,,307,,,,,,,307,,,,,307,,307,307,,,307,,,307,,,,,
+심은아,308,,,,,302,,306,307,,302,,307,,306,308,302,303,,,,302,304,,,,306,302,,
+김미경(수),304,304,304,,,304,304,,,,304,,304,,,304,304,304,,304,,304,,,,,304,,,304
+이하영,,306,,306,,306,306,,306,,,306,,,,,306,,306,306,,,306,306,306,306,,306,,
+노강우,,,306,,306,,,,308,306,306,302,,306,,306,301,306,,,306,,308,302,,302,308,,308,306
+송옥란,,,,,,,,,,,,307,,,,,,,,,,,,,,307,,,,
+이현화,,303,303,,,,303,,,,,,,,,,,,,303,303,,,,,,,,,
+김보민,,,,,,,,,,,308,,,,,,,308,,,,,,,,,,,,
+전근완,직업,,,,302,303,,,,302,,,,302,,,303,,,,,,,,,,303,,,
+박미연,305,,,,304,,,,304,304,,,305,304,,,,,,,,305,,,,,,,304,
+배수진,,,,,307,,,,,307,,,,307,,,,,,,,,307,,,,,,307,
+최은영,,,,,,,,302,,,,,,,302,,,,,,,,,,,,,,,
+이영미,,307,,,,,307,305,302,,305,305,,,305,305,,305,305,307,,,302,305,305,305,,305,302,
+이은지,,,,301,,,,301,,,,,,,301,,,301,,,,,,,301,,,301,,
+김미경(물),,,,,,308,,,,,,301,,,,,308,,,,,,,307,,,302,,,
+이진아,,,305,,,,,,303,,,,,,,,,,302,,304,,,,,,,,306,303
+김상수,,,,308,,,,,,,,308,,,,,,,308,,,,,308,308,308,,,,
+이재연,306,,,,,,,,,,,,306,,,,,,,,,306,303,,,301,,,303,
+이경화,,301,302,,,,,307,,,,,,,307,,,,,,302,,,,,,,307,,302
+안영옥,,308,,,,,308,,,,,,,301,,,,,,,,301,,,,,,303,,
+김정순,,305,,,305,305,305,,305,305,,,,305,,,305,,,305,305,,305,,,,305,,305,305
+유승현,301,,,302,301,,,303,,301,,,301,,303,,,,,,,,,,,,,,,
+조영글,,,,304,,301,301,304,,,301,,,,304,301,,,304,301,,,,301,304,,301,304,,
+임은정,,,301,,,,,,,,303,,,,,303,,,,,301,,,,,,,,,301
+이호순,,302,,,,,,,,,,,,,,,,,,302,,,,,,,,,,
+정수일,,,,,,,,,301,,,,,,,,,,,,,,301,,,,,,301,
+이은경,,,,,,,,,,,,,,,,302,,302,,,,,,,,,,,,
+최선임,303,,,303,,,,,,,,,303,,,,,,303,,,,,,303,,,,,
+박선영,,직업,직업,직업,,307,,,,,,,,,,,307,,,,,,,,,,307,,,
+문미선,,,,,직업,직업,,,,,,,,,,,,,,,,,,,,,,,,
+`;
+
 const studentCsvGrade1 = `학번,이름
 10101,김민수
 10102,김사랑
@@ -743,7 +780,6 @@ const studentCsvAllGrade2 = `학번,이름
 20717,이신비
 20718,이윤호
 20719,장서연
-20720,전다희
 20721,정소민
 20722,지민혜
 20723,차서연
@@ -965,7 +1001,6 @@ const studentCsvGrade2 = `학번,이름,심화 국어,기하,영어권 문화,�
 20717,이신비,,E,,,,,,A,D,,C,,,,B,
 20718,이윤호,,B,,,,,,D,E,C,,,,,A,
 20719,장서연,,,,,C,E,D,,,,,,,A,B,
-20720,전다희
 20721,정소민,,,,,,C,D,,,A,E,,,,,B
 20722,지민혜,,,,,C,E,D,,,,,,,A,B,
 20723,차서연,,,E,,C,B,,,,,,,,A,D,
@@ -1221,7 +1256,227 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
 30827,한도원,D,I,,G,,,H,,,,E,,,,,,B,J,,,,,,,,,,,C,,,,A,F,I
 30828,허예준,D,C,,G,,I,,,,,,A,,B,F,,,,,,H,,,,,,,,,,,,E,J,C
 `;
-        
+
+const studentCsvGrade3Names = `학번,이름
+30101,김도윤
+30102,김승준
+30103,김연주
+30104,김영우
+30105,김준석
+30106,김진수
+30107,김한울
+30108,류동완
+30109,박채윤
+30110,백경림
+30111,백경민
+30112,성승현
+30113,송유림
+30114,안준혁
+30115,원준희
+30116,이동건
+30117,이상준
+30118,이승현
+30119,이예빈
+30120,이은유
+30121,이재원
+30122,임규헌
+30123,임서연
+30124,임찬현
+30125,임형준
+30126,전우주
+30127,최기혁
+30128,최슬아
+30129,허이지
+30201,강윤경
+30202,곽은제
+30203,김규민
+30204,김민건
+30205,김보민
+30206,김영호
+30207,김정우
+30208,김지민
+30209,김채빈
+30210,김태욱
+30211,문수영
+30212,박민지
+30213,박효범
+30214,배연아
+30215,백인웅
+30216,백인천
+30218,신종효
+30219,유채현
+30220,유호진
+30221,이용찬
+30222,이지훈
+30223,임형주
+30224,장신혁
+30225,정원재
+30226,정재성
+30227,추지은
+30228,한기윤
+30301,강지민
+30302,김대환
+30303,김도윤
+30304,김민서
+30305,김민준
+30306,김보민
+30307,나은호
+30308,나희훈
+30309,남시은
+30310,박수인
+30311,박유찬
+30312,박정후
+30313,신준서
+30314,안효준
+30315,유민서
+30316,유빛나
+30317,윤희상
+30318,이다연
+30319,이서원
+30320,이선기
+30321,이수연
+30322,이정훈
+30323,이현준
+30324,장호승
+30325,전주환
+30326,조승민
+30327,JINRUI
+30401,곽민서
+30402,김건우
+30403,김동우
+30404,김동준
+30405,김민서
+30406,김정우
+30407,류정민
+30408,서은채
+30409,성경민
+30410,송상윤
+30411,신재은
+30412,안성현
+30413,유진서
+30414,유현준
+30415,윤정기
+30416,이경민
+30417,이동건
+30418,이상윤
+30419,이성신
+30420,이혜빈
+30421,임태경
+30422,장진영
+30423,전찬희
+30424,조하랑
+30425,차성제
+30426,최아윤
+30427,하시은
+30428,한종범
+30501,고동민
+30502,고성은
+30503,고유찬
+30504,김도의
+30505,김동하
+30506,김석필
+30507,김예은
+30508,김유니스
+30509,김진환
+30510,박성은
+30511,박준희
+30512,배영찬
+30513,배정원
+30514,서웅재
+30515,서주영
+30516,안규리
+30517,이예람
+30518,임재현
+30519,임준건
+30520,임형준
+30521,장문지
+30522,장치현
+30523,전재혁
+30524,정이채
+30525,정해린
+30526,조현
+30527,최예은
+30528,허다경
+30601,강동현
+30603,김민아
+30604,김보미
+30605,김예찬
+30606,김은수
+30607,김현빈
+30608,남효리
+30609,박보경
+30610,박현규
+30611,선윤호
+30612,신승민
+30613,심예준
+30614,유서진
+30615,유승후
+30616,유태현
+30617,윤량우
+30618,윤수혁
+30619,이성은
+30620,이종명
+30621,정수린
+30622,제민철
+30623,조민성
+30624,조영인
+30625,조이현
+30626,최석규
+30627,최소은
+30628,최주희
+30701,고산
+30702,구민준
+30703,김나영
+30704,김도경
+30705,김동경
+30706,김병수
+30707,김승현
+30708,김원재
+30709,김준호
+30711,민경조
+30712,박채윤
+30713,송찬익
+30714,심준석
+30715,유정민
+30716,윤석영
+30717,윤세희
+30718,이연서
+30719,이원준
+30720,이종원
+30721,이효경
+30722,정여진
+30723,정준서
+30724,조서연
+30725,조유이
+30726,조형록
+30727,최영서
+30801,강민주
+30802,고건혁
+30803,김강현
+30804,김규완
+30805,김도일
+30806,김보명
+30807,김예진
+30808,김현우
+30809,문세현
+30810,박성원
+30811,백채원
+30812,서준혁
+30813,송민우
+30814,오연우
+30815,원혜림
+30816,이시은
+30819,이준영
+30820,이찬교
+30821,장민주
+30822,조민서
+30824,최유찬
+30825,최준혁
+30826,하은비
+30827,한도원
+30828,허예준
+`;
+
         // --- End of Data Section ---
 
         // --- React Hooks and Data Maps ---
@@ -1230,12 +1485,12 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
         };
         
         // --- Helper Functions ---
-        const parseTimetableCSV = (csvText) => {
+        const parseTimetableCSV = (csvText, isGrade3 = false) => {
             return new Promise((resolve, reject) => {
                 try {
                     if (!csvText) return resolve({ records: [], teachers: [], classes: [], teacherHours: {} });
                     const rows = csvText.trim().split('\n').map(row => row.split(',').map(cell => cell.trim()));
-                    if (rows.length < 3) reject(new Error('CSV file is too short.'));
+                    if (rows.length < 2) reject(new Error('CSV file is too short.'));
                     
                     const headers = [];
                     let currentDayLabel = '';
@@ -1247,26 +1502,49 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
                     }
                     
                     const records = [], teachers = new Set(), classes = new Set(), teacherHours = {};
-                    for (let i = 2; i < rows.length; i += 2) {
-                        const teacherRow = rows[i];
-                        const subjectRow = rows[i + 1];
-                        if (!teacherRow || !teacherRow[0] || !subjectRow) continue;
-                        
-                        const teacherName = teacherRow[0];
-                        teachers.add(teacherName);
-                        teacherHours[teacherName] = parseInt(subjectRow[0] || '0', 10) || 0;
-                        
-                        for (let j = 1; j < teacherRow.length; j++) {
-                            const classId = teacherRow[j];
-                            let subject = subjectRow[j];
-                            const header = headers[j - 1];
-                            if (classId && classId.includes('창체') && !subject) subject = classId;
-                            if (classId && subject && header && header.period) {
-                                records.push({ teacher: teacherName, classId, subject, day: header.day, period: header.period });
-                                classes.add(classId);
+                    
+                    if (isGrade3) {
+                         // 고3 데이터는 교사별로 한 줄씩 있음. 과목 정보 없음.
+                        for (let i = 2; i < rows.length; i++) {
+                            const teacherRow = rows[i];
+                            if (!teacherRow || !teacherRow[0]) continue;
+                            const teacherName = teacherRow[0];
+                            teachers.add(teacherName);
+                            for (let j = 1; j < teacherRow.length; j++) {
+                                const classId = teacherRow[j];
+                                // 고3은 과목명이 별도로 없으므로, 학급 정보만 사용.
+                                const subject = classId; 
+                                const header = headers[j - 1];
+                                if (classId && subject && header && header.period) {
+                                    records.push({ teacher: teacherName, classId, subject, day: header.day, period: header.period });
+                                    if(classId !== '창체' && classId !== '직업') classes.add(classId);
+                                }
+                            }
+                        }
+                    } else {
+                        // 1, 2학년 데이터는 교사 정보와 과목 정보가 2줄씩 쌍으로 있음.
+                        for (let i = 2; i < rows.length; i += 2) {
+                            const teacherRow = rows[i];
+                            const subjectRow = rows[i + 1];
+                            if (!teacherRow || !teacherRow[0] || !subjectRow) continue;
+                            
+                            const teacherName = teacherRow[0];
+                            teachers.add(teacherName);
+                            teacherHours[teacherName] = parseInt(subjectRow[0] || '0', 10) || 0;
+                            
+                            for (let j = 1; j < teacherRow.length; j++) {
+                                const classId = teacherRow[j];
+                                let subject = subjectRow[j];
+                                const header = headers[j - 1];
+                                if (classId && classId.includes('창체') && !subject) subject = classId;
+                                if (classId && subject && header && header.period) {
+                                    records.push({ teacher: teacherName, classId, subject, day: header.day, period: header.period });
+                                     if(classId !== '창체') classes.add(classId);
+                                }
                             }
                         }
                     }
+                    
                     resolve({
                         records,
                         teachers: Array.from(teachers).sort(),
@@ -1336,6 +1614,9 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
                             <button onClick={() => onSemesterSelect('1')} disabled={isLoading} className="w-full sm:w-auto flex-1 px-8 py-4 text-xl font-bold text-white bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all disabled:bg-gray-400">{isLoading ? '로딩 중...' : '1학기 시간표'}</button>
                             <button onClick={() => onSemesterSelect('2')} disabled={isLoading} className="w-full sm:w-auto flex-1 px-8 py-4 text-xl font-bold text-white bg-gradient-to-r from-green-500 to-green-600 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all disabled:bg-gray-400">{isLoading ? '로딩 중...' : '2학기 시간표'}</button>
                         </div>
+                        <div className="pt-4">
+                            <button onClick={() => onSemesterSelect('3')} disabled={isLoading} className="w-full sm:w-auto flex-1 px-8 py-4 text-xl font-bold text-white bg-gradient-to-r from-red-500 to-red-600 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all disabled:bg-gray-400">{isLoading ? '로딩 중...' : '고3 시간표'}</button>
+                        </div>
                          <div className="pt-4">
                             <button onClick={onStudentSearchSelect} disabled={isLoading} className="w-full sm:w-auto flex-1 px-8 py-4 text-xl font-bold text-white bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all disabled:bg-gray-400">{isLoading ? '로딩 중...' : '개인별/반별 선택과목 확인'}</button>
                         </div>
@@ -1348,11 +1629,18 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
         const StudentListModal = ({ modalData, onClose, onStudentClick }) => {
             if (!modalData) return null;
             const { subject, students, isElective, teacher } = modalData;
+
+            const handleRowClick = (student) => {
+                if (isElective) {
+                    onStudentClick(student);
+                }
+            };
+
             return (
                 <div className="no-print fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50" onClick={onClose}>
                     <div className="bg-white rounded-xl shadow-2xl w-full max-w-lg max-h-[80vh] flex flex-col" onClick={(e) => e.stopPropagation()}>
                         <header className="p-5 border-b border-gray-200 text-center">
-                            <h2 className="text-2xl font-bold text-gray-800">{subject} 수강생 명단</h2>
+                            <h2 className="text-2xl font-bold text-gray-800">{subject}</h2>
                              {teacher && <p className="text-lg text-gray-700 font-semibold mt-2">담당교사: {teacher}</p>}
                             <p className="text-base text-gray-600 mt-1">총 {students.length}명</p>
                         </header>
@@ -1361,7 +1649,7 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
                                 <thead className="text-lg text-gray-700"><tr><th className="w-16 px-4 py-2">순</th><th className="px-4 py-2">학번</th><th className="px-4 py-2">이름</th></tr></thead>
                                 <tbody>
                                     {students.map((student, index) => (
-                                        <tr key={index} className={`border-t ${isElective ? 'cursor-pointer hover:bg-blue-100' : ''}`} onClick={() => isElective && onStudentClick(student)}>
+                                        <tr key={index} className={`border-t ${isElective ? 'cursor-pointer hover:bg-blue-100' : ''}`} onClick={() => handleRowClick(student)}>
                                             <td className="px-4 py-2">{index + 1}</td><td className="px-4 py-2">{student.id}</td><td className="px-4 py-2">{student.name}</td>
                                         </tr>
                                     ))}
@@ -1438,44 +1726,82 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
             const [viewMode, setViewMode] = useState('teacher');
             const [selectedTeacher, setSelectedTeacher] = useState('');
             const [selectedClass, setSelectedClass] = useState('');
+            const isGrade3 = schoolInfo.semester === '고3';
+        
             useEffect(() => {
                 if (parsedData.teachers.length > 0) setSelectedTeacher(parsedData.teachers[0]);
                 if (parsedData.classes.length > 0) setSelectedClass(parsedData.classes[0]);
             }, [parsedData]);
+        
             const gridData = useMemo(() => {
                 const grid = Array(7).fill(null).map(() => Array(5).fill(null));
+                const records = parsedData.records;
+        
                 if (viewMode === 'teacher' && selectedTeacher) {
-                    parsedData.records.filter(r => r.teacher === selectedTeacher).forEach(item => {
+                    records.filter(r => r.teacher === selectedTeacher).forEach(item => {
                         const dayIndex = DAYS_OF_WEEK.indexOf(item.day);
                         const periodIndex = item.period - 1;
-                        if (dayIndex !== -1 && periodIndex >= 0 && periodIndex < 7) { grid[periodIndex][dayIndex] = { topText: item.classId, bottomText: item.subject }; }
+                        if (dayIndex !== -1 && periodIndex >= 0 && periodIndex < 7) {
+                            grid[periodIndex][dayIndex] = {
+                                topText: item.classId,
+                                bottomText: isGrade3 ? '' : item.subject
+                            };
+                        }
                     });
                 } else if (viewMode === 'class' && selectedClass) {
-                     for (let p = 0; p < 7; p++) {
+                    for (let p = 0; p < 7; p++) {
                         for (let d = 0; d < 5; d++) {
-                            const matchingRecords = parsedData.records.filter(r => r.classId === selectedClass && r.day === DAYS_OF_WEEK[d] && r.period === p + 1);
-                            if (matchingRecords.length > 0) { grid[p][d] = { topText: matchingRecords[0].subject, bottomText: matchingRecords.map(r => r.teacher).join(', ') }; }
+                            const matchingRecords = records.filter(r => r.classId === selectedClass && r.day === DAYS_OF_WEEK[d] && r.period === p + 1);
+                            if (matchingRecords.length > 0) {
+                                grid[p][d] = {
+                                    topText: isGrade3 ? matchingRecords.map(r => r.teacher).join(', ') : matchingRecords[0].subject,
+                                    bottomText: isGrade3 ? '' : matchingRecords.map(r => r.teacher).join(', ')
+                                };
+                            }
                         }
                     }
-                    if(parsedData.records.some(r => r.day === '수' && r.period === 5 && r.subject.includes('창체'))) grid[4][2] = { topText: '창체', bottomText: '창체' };
-                    if(parsedData.records.some(r => r.day === '수' && r.period === 6 && r.subject.includes('창체'))) grid[5][2] = { topText: '창체', bottomText: '창체' };
+                    if (!isGrade3 && records.some(r => r.day === '수' && r.period >= 5 && r.subject.includes('창체'))) {
+                         grid[4][2] = { topText: '창체', bottomText: '창체' };
+                         grid[5][2] = { topText: '창체', bottomText: '창체' };
+                    }
                 }
                 return grid;
-            }, [viewMode, selectedTeacher, selectedClass, parsedData.records]);
+            }, [viewMode, selectedTeacher, selectedClass, parsedData.records, isGrade3]);
+        
             const teacherTotalHours = useMemo(() => (viewMode === 'teacher' && selectedTeacher && parsedData.teacherHours) ? parsedData.teacherHours[selectedTeacher] ?? 0 : 0, [viewMode, selectedTeacher, parsedData.teacherHours]);
+        
             const handleCellClick = useCallback((cell) => {
                 if (!cell) return;
-                const subject = viewMode === 'teacher' ? cell.bottomText : cell.topText;
                 const classId = viewMode === 'teacher' ? cell.topText : selectedClass;
-                const teacher = viewMode === 'teacher' ? selectedTeacher : cell.bottomText;
+                let subject, teacher;
+
+                if (isGrade3) {
+                    if (viewMode === 'teacher') {
+                        subject = '';
+                        teacher = selectedTeacher;
+                    } else { // class view
+                        subject = cell.topText; // This is actually the teacher's name
+                        teacher = cell.topText;
+                    }
+                } else {
+                     subject = viewMode === 'teacher' ? cell.bottomText : cell.topText;
+                     teacher = viewMode === 'teacher' ? selectedTeacher : cell.bottomText;
+                }
                 onCellClick(subject, classId, teacher);
-            }, [viewMode, selectedClass, selectedTeacher, onCellClick]);
+            }, [viewMode, selectedClass, selectedTeacher, onCellClick, isGrade3]);
+        
             return (
                 <div id="printable-area" className="printable bg-white p-4 md:p-8 rounded-lg shadow-2xl w-full space-y-6">
                     <header className="space-y-4">
                         <div className="relative text-center pb-4 border-b-2 border-gray-200">
-                             <div className="absolute left-0 top-1/2 transform -translate-y-1/2"><button onClick={onReset} className="px-4 py-2 bg-[#cc4125] hover:bg-[#b33a22] text-white font-bold rounded-lg shadow-md transition-colors text-base flex items-center gap-2 no-print"><svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>뒤로</button></div>
-                            <h1 className="text-2xl md:text-4xl font-bold tracking-tight text-black">2025학년도 {schoolInfo.semester}학기 시간표</h1>
+                            <div className="absolute left-0 top-1/2 transform -translate-y-1/2">
+                                <button onClick={onReset} className="px-4 py-2 bg-[#cc4125] hover:bg-[#b33a22] text-white font-bold rounded-lg shadow-md transition-colors text-base flex items-center gap-2 no-print">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>뒤로
+                                </button>
+                            </div>
+                            <h1 className="text-2xl md:text-4xl font-bold tracking-tight text-black">
+                                2025학년도 {isGrade3 ? '고3' : `${schoolInfo.semester}학기`} 시간표
+                            </h1>
                         </div>
                         <div className="flex flex-wrap justify-between items-center gap-4">
                             <div className="flex items-center gap-2 flex-shrink-0">
@@ -1484,15 +1810,13 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
                             </div>
                             <div className="flex-grow flex justify-center w-full md:w-auto">
                                 <div className="flex items-center bg-white shadow-md rounded-lg p-2 w-full max-w-[20rem]">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                                     {viewMode === 'teacher' ? (
                                         <div className="flex items-center w-full justify-between overflow-hidden">
                                             <select value={selectedTeacher} onChange={(e) => setSelectedTeacher(e.target.value)} className="bg-transparent text-gray-900 font-bold focus:outline-none block w-full appearance-none text-center text-2xl md:text-3xl truncate">
                                                 {parsedData.teachers.map(t => <option key={t} value={t}>{t}</option>)}
                                             </select>
-                                            <div className="bg-yellow-400 text-gray-800 font-bold px-3 py-1 rounded-md text-base whitespace-nowrap ml-2">{teacherTotalHours}시간</div>
+                                            {!isGrade3 && teacherTotalHours > 0 && <div className="bg-yellow-400 text-gray-800 font-bold px-3 py-1 rounded-md text-base whitespace-nowrap ml-2">{teacherTotalHours}시간</div>}
                                         </div>
                                     ) : (
                                         <select value={selectedClass} onChange={(e) => setSelectedClass(e.target.value)} className="bg-transparent text-gray-900 font-bold focus:outline-none block w-full appearance-none text-center text-2xl md:text-3xl">
@@ -1523,7 +1847,6 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
                 const allHeaders = [...new Set([...studentData2.headers, ...studentData3.headers])];
                 const transformed = combinedData.map(s => {
                     const choices = {};
-                    // First, map codes to short names, allowing overwrites for now.
                     allHeaders.forEach(h => { 
                         const c = s[h]; 
                         if(c) {
@@ -1532,12 +1855,10 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
                         }
                     });
 
-                    // Specifically for 3rd graders, check for the combined subject case.
                     if (s['학번'].startsWith('3')) {
                         const ungounCode = s['운동과 건강'];
                         const changdokCode = s['창독'];
                         
-                        // If both subjects exist and share the same code
                         if (ungounCode && ungounCode === changdokCode) {
                             const ungounShort = Object.keys(SUBJECT_CODE_MAP).find(key => SUBJECT_CODE_MAP[key] === '운동과 건강') || '운건';
                             const changdokShort = Object.keys(SUBJECT_CODE_MAP).find(key => SUBJECT_CODE_MAP[key] === '창독') || '창독';
@@ -1635,7 +1956,8 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
             const [error, setError] = useState(null);
             const [studentData1, setStudentData1] = useState(null);
             const [studentData2, setStudentData2] = useState(null);
-            const [studentData3, setStudentData3] = useState(null);
+            const [studentData3, setStudentData3] = useState(null); 
+            const [studentData3Names, setStudentData3Names] = useState(null);
             const [studentAllData2, setStudentAllData2] = useState(null);
             const [modalData, setModalData] = useState(null);
             const [studentDetailModalData, setStudentDetailModalData] = useState(null);
@@ -1649,9 +1971,11 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
                         const sData2 = parseStudentCSV(studentCsvGrade2);
                         const sData3 = parseStudentCSV(studentCsvGrade3);
                         const sAllData2 = parseStudentCSV(studentCsvAllGrade2);
+                        const sData3Names = parseStudentCSV(studentCsvGrade3Names);
                         setStudentData2(sData2);
                         setStudentData3(sData3);
                         setStudentAllData2(sAllData2);
+                        setStudentData3Names(sData3Names);
                         setGrade2Subjects(sData2.headers);
                         setGrade3Subjects(sData3.headers);
                     } catch (e) {
@@ -1665,9 +1989,12 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
             const handleSemesterSelect = useCallback(async (semester) => {
                 setIsLoading(true); setError(null);
                 try {
-                    const data = await parseTimetableCSV(semester === '1' ? semester1Csv : semester2Csv);
+                    const isGrade3 = semester === '3';
+                    const csvData = semester === '1' ? semester1Csv : semester === '2' ? semester2Csv : semester3Csv;
+                    const data = await parseTimetableCSV(csvData, isGrade3);
                     setParsedData(data);
-                    setSchoolInfo({ year: '2025', semester });
+                    const semesterText = isGrade3 ? '고3' : semester;
+                    setSchoolInfo({ year: '2025', semester: semesterText });
                     setCurrentView('timetable');
                 } catch (err) { setError(`데이터 로딩 실패: ${err.message}`); console.error(err); } 
                 finally { setIsLoading(false); }
@@ -1676,6 +2003,18 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
             const handleReset = useCallback(() => { setCurrentView('home'); setSchoolInfo(null); setParsedData(null); setError(null); }, []);
 
             const handleCellClick = useCallback((subjectString, classId, teacher) => {
+                const isGrade3Click = schoolInfo?.semester === '고3';
+
+                if (isGrade3Click) {
+                    const studentList = studentData3Names?.data;
+                    if (!studentList) return;
+                    const classStudents = studentList.filter(s => s['학번'].startsWith(classId)).map(s => ({ id: s['학번'], name: s['이름'], grade: '3' }));
+                    if (classStudents.length > 0) {
+                        setModalData({ subject: `${classId}반 명단`, students: classStudents, isElective: false, teacher: teacher });
+                    }
+                    return;
+                }
+                
                 if (!subjectString || !classId) return;
                 let subjectKey = null, code = null;
                 const sortedKeys = Object.keys(SUBJECT_CODE_MAP).sort((a, b) => b.length - a.length);
@@ -1689,26 +2028,21 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
 
                 if (subjectKey && code) {
                     const fullSubjectName = SUBJECT_CODE_MAP[subjectKey];
-                    let grade;
-                    if (grade2Subjects.includes(fullSubjectName)) grade = '2';
-                    else if (grade3Subjects.includes(fullSubjectName)) grade = '3';
-                    else return;
+                    const grade = grade2Subjects.includes(fullSubjectName) ? '2' : '3';
                     const studentChoiceData = grade === '2' ? studentData2?.data : studentData3?.data;
                     if (!studentChoiceData) return;
                     const enrolledStudents = studentChoiceData.filter(s => s[fullSubjectName] === code).map(s => ({ id: s['학번'], name: s['이름'], grade }));
                     if (enrolledStudents.length > 0) setModalData({ subject: `${subjectString} (${fullSubjectName})`, students: enrolledStudents, isElective: true, teacher: teacher });
                 } else {
                     const grade = classId.toString().charAt(0);
-                    if (!['1', '2', '3'].includes(grade)) return;
-                    let studentList;
-                    if (grade === '1') studentList = studentData1?.data;
-                    else if (grade === '2') studentList = studentAllData2?.data;
-                    else if (grade === '3') studentList = studentData3?.data;
+                    if (!['1', '2'].includes(grade)) return;
+                    const studentList = grade === '1' ? studentData1?.data : studentAllData2?.data;
                     if (!studentList) return;
                     const classStudents = studentList.filter(s => s['학번'].startsWith(classId)).map(s => ({ id: s['학번'], name: s['이름'], grade }));
                     if (classStudents.length > 0) setModalData({ subject: `${classId}반 (${subjectString})`, students: classStudents, isElective: false, teacher: teacher });
                 }
-            }, [studentData1, studentAllData2, studentData2, studentData3, grade2Subjects, grade3Subjects]);
+            }, [schoolInfo, studentData1, studentAllData2, studentData2, studentData3, studentData3Names, grade2Subjects, grade3Subjects]);
+
 
             const handleStudentNameClick = useCallback((student) => {
                 const studentDataSource = student.grade === '2' ? studentData2?.data : studentData3?.data;
@@ -1731,16 +2065,13 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
                 const body = document.body;
 
                 if (printElement) {
-                    // Body 클래스로 페이지 방향 제어
                     if (viewType === 'student_search') body.classList.add('printing-landscape');
                     else body.classList.add('printing-portrait');
 
-                    // 인쇄 대상에 printing 클래스 추가
                     printElement.classList.add('printing');
 
                     setTimeout(() => {
                         window.print();
-                        // 인쇄 후 클래스 제거
                         body.classList.remove('printing-landscape', 'printing-portrait');
                         printElement.classList.remove('printing');
                     }, 150);
@@ -1763,7 +2094,6 @@ const studentCsvGrade3 = `학번,이름,영어 독해와 작문,운동과 건강
                         <StudentDetailModal modalData={studentDetailModalData} onClose={() => setStudentDetailModalData(null)} />
                         {renderView()}
                     </main>
-                    {/* --- 👇 Footer 추가 --- */}
                     {isAuthenticated && (
                          <footer className="w-full text-center text-gray-500 text-sm mt-8 no-print">
                             © 2025 KH KIM. All Rights Reserved.
