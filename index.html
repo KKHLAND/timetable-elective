@@ -1578,28 +1578,6 @@ const studentCsvGrade3Names = `학번,이름
         };
 
         // --- Components ---
-        const PasswordScreen = ({ onSuccess }) => {
-            const [password, setPassword] = useState('');
-            const [error, setError] = useState('');
-            const handleSubmit = (e) => {
-                e.preventDefault();
-                if (password === '070531') { onSuccess(); } 
-                else { setError('암호가 올바르지 않습니다.'); setPassword(''); }
-            };
-            return (
-                <div className="bg-white p-8 rounded-lg shadow-2xl max-w-md mx-auto text-center">
-                    <header className="mb-8"><h1 className="text-3xl font-bold text-gray-800">시간표 확인</h1><p className="text-lg text-gray-600 mt-2">계속하려면 암호를 입력하세요.</p></header>
-                    <main>
-                        <form onSubmit={handleSubmit} className="space-y-6">
-                            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full px-4 py-3 text-center text-xl tracking-widest border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="••••••" autoFocus />
-                            <button type="submit" className="w-full px-8 py-3 text-xl font-bold text-white bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">확인</button>
-                            {error && <p className="text-red-500 text-sm mt-4">{error}</p>}
-                        </form>
-                    </main>
-                </div>
-            );
-        };
-        
         const HomeScreen = ({ onSemesterSelect, onStudentSearchSelect, isLoading, error }) => {
             return (
                 <div className="bg-white p-8 rounded-lg shadow-2xl max-w-2xl mx-auto text-center">
@@ -1610,15 +1588,11 @@ const studentCsvGrade3Names = `학번,이름
                     </header>
                     <main className="space-y-4">
                         <p className="text-lg text-gray-700">원하는 메뉴를 선택하세요.</p>
-                        <div className="flex flex-col sm:flex-row justify-center gap-4">
-                            <button onClick={() => onSemesterSelect('1')} disabled={isLoading} className="w-full sm:w-auto flex-1 px-8 py-4 text-xl font-bold text-white bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all disabled:bg-gray-400">{isLoading ? '로딩 중...' : '1학기 시간표'}</button>
-                            <button onClick={() => onSemesterSelect('2')} disabled={isLoading} className="w-full sm:w-auto flex-1 px-8 py-4 text-xl font-bold text-white bg-gradient-to-r from-green-500 to-green-600 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all disabled:bg-gray-400">{isLoading ? '로딩 중...' : '2학기 시간표'}</button>
-                        </div>
-                        <div className="pt-4">
-                            <button onClick={() => onSemesterSelect('3')} disabled={isLoading} className="w-full sm:w-auto flex-1 px-8 py-4 text-xl font-bold text-white bg-gradient-to-r from-red-500 to-red-600 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all disabled:bg-gray-400">{isLoading ? '로딩 중...' : '고3 시간표'}</button>
-                        </div>
-                         <div className="pt-4">
-                            <button onClick={onStudentSearchSelect} disabled={isLoading} className="w-full sm:w-auto flex-1 px-8 py-4 text-xl font-bold text-white bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all disabled:bg-gray-400">{isLoading ? '로딩 중...' : '개인별/반별 선택과목 확인'}</button>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <button onClick={() => onSemesterSelect('1')} disabled={isLoading} className="w-full px-8 py-4 text-xl font-bold text-white bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all disabled:bg-gray-400">{isLoading ? '로딩 중...' : '1학기 시간표'}</button>
+                            <button onClick={() => onSemesterSelect('2')} disabled={isLoading} className="w-full px-8 py-4 text-xl font-bold text-white bg-gradient-to-r from-green-500 to-green-600 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all disabled:bg-gray-400">{isLoading ? '로딩 중...' : '2학기 시간표'}</button>
+                            <button onClick={() => onSemesterSelect('3')} disabled={isLoading} className="w-full px-8 py-4 text-xl font-bold text-white bg-gradient-to-r from-red-500 to-red-600 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all disabled:bg-gray-400">{isLoading ? '로딩 중...' : '고3 시간표'}</button>
+                            <button onClick={onStudentSearchSelect} disabled={isLoading} className="w-full px-8 py-4 text-xl font-bold text-white bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all disabled:bg-gray-400">{isLoading ? '로딩 중...' : '개인별/반별 선택과목 확인'}</button>
                         </div>
                         {error && <p className="text-red-500 text-sm mt-4">{error}</p>}
                     </main>
@@ -1813,13 +1787,13 @@ const studentCsvGrade3Names = `학번,이름
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                                     {viewMode === 'teacher' ? (
                                         <div className="flex items-center w-full justify-between overflow-hidden">
-                                            <select value={selectedTeacher} onChange={(e) => setSelectedTeacher(e.target.value)} className="bg-transparent text-gray-900 font-bold focus:outline-none block w-full appearance-none text-center text-2xl md:text-3xl truncate">
+                                            <select value={selectedTeacher} onChange={(e) => setSelectedTeacher(e.target.value)} className="bg-transparent text-gray-900 font-bold focus:outline-none block w-full appearance-none text-center text-xl md:text-2xl truncate">
                                                 {parsedData.teachers.map(t => <option key={t} value={t}>{t}</option>)}
                                             </select>
                                             {!isGrade3 && teacherTotalHours > 0 && <div className="bg-yellow-400 text-gray-800 font-bold px-3 py-1 rounded-md text-base whitespace-nowrap ml-2">{teacherTotalHours}시간</div>}
                                         </div>
                                     ) : (
-                                        <select value={selectedClass} onChange={(e) => setSelectedClass(e.target.value)} className="bg-transparent text-gray-900 font-bold focus:outline-none block w-full appearance-none text-center text-2xl md:text-3xl">
+                                        <select value={selectedClass} onChange={(e) => setSelectedClass(e.target.value)} className="bg-transparent text-gray-900 font-bold focus:outline-none block w-full appearance-none text-center text-xl md:text-2xl">
                                             {parsedData.classes.map(c => <option key={c} value={c}>{c}</option>)}
                                         </select>
                                     )}
@@ -1948,7 +1922,7 @@ const studentCsvGrade3Names = `학번,이름
         };
 
         const App = () => {
-            const [isAuthenticated, setIsAuthenticated] = useState(false);
+            const [isAuthenticated, setIsAuthenticated] = useState(true);
             const [currentView, setCurrentView] = useState('home');
             const [schoolInfo, setSchoolInfo] = useState(null);
             const [parsedData, setParsedData] = useState(null);
@@ -1956,7 +1930,7 @@ const studentCsvGrade3Names = `학번,이름
             const [error, setError] = useState(null);
             const [studentData1, setStudentData1] = useState(null);
             const [studentData2, setStudentData2] = useState(null);
-            const [studentData3, setStudentData3] = useState(null); 
+            const [studentData3, setStudentData3] = useState(null);
             const [studentData3Names, setStudentData3Names] = useState(null);
             const [studentAllData2, setStudentAllData2] = useState(null);
             const [modalData, setModalData] = useState(null);
@@ -1985,7 +1959,6 @@ const studentCsvGrade3Names = `학번,이름
                 }
             }, [isAuthenticated]);
             
-            const handlePasswordSuccess = useCallback(() => setIsAuthenticated(true), []);
             const handleSemesterSelect = useCallback(async (semester) => {
                 setIsLoading(true); setError(null);
                 try {
@@ -2079,7 +2052,7 @@ const studentCsvGrade3Names = `학번,이름
             };
             
             const renderView = () => {
-                if (!isAuthenticated) return <PasswordScreen onSuccess={handlePasswordSuccess} />;
+                if (!isAuthenticated) return null; // 로그인 화면을 그냥 렌더링하지 않음
                 switch (currentView) {
                     case 'timetable': return <TimetableScreen schoolInfo={schoolInfo} parsedData={parsedData} onReset={handleReset} onCellClick={handleCellClick} onPrint={() => handlePrint('timetable')} />;
                     case 'student_search': return <StudentSearchView studentData2={studentData2} studentData3={studentData3} onReset={handleReset} onPrint={() => handlePrint('student_search')} />;
